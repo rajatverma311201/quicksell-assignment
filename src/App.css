@@ -1,8 +1,0 @@
-.app {
-    display: flex;
-    gap: 25px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 50px;
-}
