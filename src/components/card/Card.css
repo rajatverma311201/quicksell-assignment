@@ -1,0 +1,85 @@
+.card {
+    border: 2px solid var(--border-medium);
+    padding: 10px;
+    border-radius: var(--rounded-md);
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+
+    display: flex;
+    gap: 5px;
+
+    width: 30rem;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card__header-id {
+    color: var(--color-grey-dark);
+    font-size: 1.5rem;
+}
+
+.card__body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block: 1rem;
+}
+
+.card__title {
+    font-size: 1.5rem;
+    color: var(--color-black);
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.card__status-icon-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.card__status-icon {
+    font-size: 2rem;
+}
+
+.card__status-icon.icon-progress {
+    color: #ffaa1d;
+}
+.card__status-icon.icon-todo,
+.card__status-icon.icon-backlog {
+    color: var(--color-grey-light);
+}
+
+.card__status-icon.icon-cancelled {
+    color: var(--color-grey-dark);
+}
+
+.card__status-icon.icon-done {
+    color: #324ab2;
+}
+
+.card__footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.card__priority {
+    display: flex;
+    font-size: 1rem;
+    border: 1.75px solid var(--border-light);
+    padding: 3px;
+    border-radius: var(--rounded-sm);
+    color: var(--color-grey-dark);
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin-right: 5px;
+}

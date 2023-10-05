@@ -1,0 +1,19 @@
+.tag {
+    border: 1.75px solid var(--border-light);
+    padding: 3px 5px;
+    border-radius: 5px;
+    color: var(--color-grey-dark);
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tag span {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--color-grey-light);
+}
