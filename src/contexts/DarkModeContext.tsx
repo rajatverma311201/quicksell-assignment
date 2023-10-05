@@ -14,7 +14,9 @@ export const DarkModeContext = createContext<DarkModeCtx>({
 interface DarkModeProviderProps {
     children: ReactNode;
 }
-function DarkModeProvider({ children }: DarkModeProviderProps) {
+export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({
+    children,
+}) => {
     const [isDarkMode, setIsDarkMode] = useLocalStorageState(
         window.matchMedia("(prefers-color-scheme: light)").matches,
         "isDarkMode"
@@ -42,5 +44,5 @@ function DarkModeProvider({ children }: DarkModeProviderProps) {
             {children}
         </DarkModeContext.Provider>
     );
-}
+};
 export default DarkModeProvider;
