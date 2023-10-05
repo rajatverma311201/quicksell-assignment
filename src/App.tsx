@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import "./App.css";
 
 import { Header } from "./components/header";
 import { ApiDataProvider, DarkModeProvider, DisplayProvider } from "./contexts";
