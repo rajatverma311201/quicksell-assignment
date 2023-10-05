@@ -88,7 +88,6 @@ body {
 
 #dark-mode-btn {
     position: relative;
-    cursor: pointer;
     border: 2px solid var(--border-medium);
     background-color: var(--color-white);
     font-size: 1.4rem;
@@ -107,6 +106,10 @@ body {
     height: 3.4rem;
     padding: 10px;
 }
+#dark-mode-btn:hover {
+    background-color: var(--color-grey-lightest);
+}
+
 #dark-mode-btn > * {
     position: absolute;
     width: 60%;
