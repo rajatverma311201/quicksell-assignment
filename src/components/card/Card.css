@@ -4,7 +4,7 @@
     border-radius: var(--rounded-md);
 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: var(--color-white);
 
     display: flex;
     gap: 5px;
@@ -28,7 +28,7 @@
 
 .card__body {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     margin-block: 1rem;
 }

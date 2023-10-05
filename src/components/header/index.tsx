@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 import { BiChevronDown } from "react-icons/bi";
 import "./Header.css";
+import { GROUPING_LIST, ORDERING_LIST } from "../../utils/constants";
+import { useGrouping, useOrdering } from "../../hooks";
+import { Grouping, Ordering } from "types";
+import { DarkModeBtn } from "./DarkModeBtn";
 export function Header() {
     const [checked, setChecked] = useState(false);
 
-    useEffect(() => {
-        console.log("Header.tsx: useEffect: checked: ", checked);
-    }, [checked]);
+    const { grouping, setGrouping } = useGrouping();
+    const { ordering, setOrdering } = useOrdering();
+
+    const handleClose = () => setChecked(false);
 
     return (
         <header className="header">
@@ -36,14 +41,50 @@ export function Header() {
                     <label htmlFor="grouping" className="form__label">
                         Grouping
                     </label>
-                    <input id="grouping" type="text" className="form__input" />
+
+                    <select
+                        name="grouping"
+                        id="grouping"
+                        className="form__input form__input--ordering"
+                        value={grouping}
+                        onChange={(e) => {
+                            setGrouping(e.target.value as Grouping);
+                            handleClose();
+                        }}
+                    >
+                        {GROUPING_LIST.map((grouping) => (
+                            <option key={grouping} value={grouping}>
+                                {grouping}
+                            </option>
+                        ))}
+                    </select>
 
                     <label htmlFor="ordering" className="form__label">
                         Ordering
                     </label>
-                    <input id="ordering" type="text" className="form__input" />
+
+                    <select
+                        name="ordering"
+                        id="ordering"
+                        className="form__input form__input--ordering"
+                        value={ordering}
+                        onChange={(e) => {
+                            setOrdering(e.target.value as Ordering);
+                            handleClose();
+                        }}
+                    >
+                        {ORDERING_LIST.map((ordering) => (
+                            <option key={ordering} value={ordering}>
+                                {ordering}
+                            </option>
+                        ))}
+                    </select>
+
+                    {/* <input id="ordering" type="text" className="form__input" /> */}
                 </form>
             </div>
+
+            <DarkModeBtn />
         </header>
     );
 }

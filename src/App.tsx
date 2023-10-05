@@ -1,131 +1,51 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./App.css";
-import { Ticket, User } from "types";
 
-import { Card } from "./components/card";
 import { Header } from "./components/header";
 import { ApiDataProvider, DarkModeProvider, DisplayProvider } from "./contexts";
+import { TicketsView } from "./components/views";
+import { useApiData } from "./hooks";
+import { useEffect } from "react";
+import { fetchData } from "./utils/api";
+import Spinner from "./components/Spinner";
 
-function App() {
+function AppInner() {
+    const { setData, setError, setLoading, loading } = useApiData();
+
+    useEffect(() => {
+        setLoading(true);
+
+        (async () => {
+            try {
+                const data = await fetchData();
+
+                setData({ tickets: data.tickets, users: data.users });
+            } catch (e: any) {
+                setError(e.message || "Something went wrong");
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, []);
+
+    return (
+        <>
+            <Header />
+            {loading ? <Spinner /> : <TicketsView />}
+        </>
+    );
+}
+
+const AppWrapper = () => {
     return (
         <DarkModeProvider>
             <DisplayProvider>
                 <ApiDataProvider>
-                    <Header />
-                    <div className="app">
-                        {/* <Tag name="Feature Request" /> */}
-                        {/* <Avatar available={true} />
-            <Avatar available={false} /> */}
-
-                        {data.tickets.map((ticket, idx) => (
-                            <Card
-                                key={data.tickets[idx].id}
-                                ticket={data.tickets[idx]}
-                                user={
-                                    data.users.find(
-                                        (usr) =>
-                                            usr.id === data.tickets[idx].userId
-                                    ) || data.users[idx]
-                                }
-                            />
-                        ))}
-                    </div>
+                    <AppInner />
                 </ApiDataProvider>
             </DisplayProvider>
         </DarkModeProvider>
     );
-}
-
-export default App;
-
-const data: { tickets: Ticket[]; users: User[] } = {
-    tickets: [
-        {
-            id: "CAM-1",
-            title: "Update User Profile Page UI",
-            tag: ["Feature request"],
-            userId: "usr-1",
-            status: "Todo",
-            priority: 4,
-        },
-        {
-            id: "CAM-2",
-            title: "Add Multi-Language Support - Enable multi-language support within the application.",
-            tag: ["Feature Request"],
-            userId: "usr-2",
-            status: "In progress",
-            priority: 3,
-        },
-        {
-            id: "CAM-3",
-            title: "Optimize Database Queries for Performance",
-            tag: ["Feature Request"],
-            userId: "usr-2",
-            status: "Cancelled",
-            priority: 1,
-        },
-        {
-            id: "CAM-4",
-            title: "Implement Email Notification System",
-            tag: ["Feature Request"],
-            userId: "usr-1",
-            status: "In progress",
-            priority: 3,
-        },
-        {
-            id: "CAM-5",
-            title: "Enhance Search Functionality",
-            tag: ["Feature Request"],
-            userId: "usr-5",
-            status: "Done",
-            priority: 0,
-        },
-        {
-            id: "CAM-6",
-            title: "Third-Party Payment Gateway",
-            tag: ["Feature Request"],
-            userId: "usr-2",
-            status: "Cancelled",
-            priority: 1,
-        },
-        {
-            id: "CAM-7",
-            title: "Create Onboarding Tutorial for New Users",
-            tag: ["Feature Request"],
-            userId: "usr-1",
-            status: "Backlog",
-            priority: 2,
-        },
-        {
-            id: "CAM-8",
-            title: "Implement Role-Based Access Control (RBAC)",
-            tag: ["Feature Request"],
-            userId: "usr-3",
-            status: "Done",
-            priority: 3,
-        },
-        {
-            id: "CAM-9",
-            title: "Upgrade Server Infrastructure",
-            tag: ["Feature Request"],
-            userId: "usr-5",
-            status: "Todo",
-            priority: 2,
-        },
-        {
-            id: "CAM-10",
-            title: "Conduct Security Vulnerability Assessment",
-            tag: ["Feature Request"],
-            userId: "usr-4",
-            status: "Backlog",
-            priority: 1,
-        },
-    ],
-    users: [
-        { id: "usr-1", name: "Anoop sharma", available: false },
-        { id: "usr-2", name: "Yogesh", available: true },
-        { id: "usr-3", name: "Shankar Kumar", available: true },
-        { id: "usr-4", name: "Ramesh", available: true },
-        { id: "usr-5", name: "Suresh", available: true },
-    ],
 };
+
+export default AppWrapper;

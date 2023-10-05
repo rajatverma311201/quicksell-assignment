@@ -19,4 +19,11 @@ declare module "types" {
 
     export type Grouping = "Status" | "User" | "Priority";
     export type Ordering = "Priority" | "Title";
+
+    export type Status =
+        | "In progress"
+        | "Todo"
+        | "Done"
+        | "Backlog"
+        | "Cancelled";
 }

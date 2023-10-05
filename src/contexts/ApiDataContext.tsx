@@ -1,6 +1,7 @@
 import { createContext, useReducer } from "react";
-import { Ticket, User } from "types";
+import { Ordering, Ticket, User } from "types";
 import {
+    ORDERING,
     SET_DATA,
     SET_ERROR,
     SET_LOADING,
@@ -31,6 +32,18 @@ export const ApiDataContext = createContext<ApiDataCtx>({
     setError: (error: string | null) => {},
     setData: ({ tickets, users }: { tickets: Ticket[]; users: User[] }) => {},
 });
+
+export const sortTicketsByOrdering = (
+    tickets: Ticket[],
+    ordering: Ordering
+) => {
+    if (ordering === ORDERING.PRIORITY) {
+        tickets.sort((a: Ticket, b: Ticket) => b.priority - a.priority);
+    } else if (ordering === ORDERING.TITLE) {
+        tickets.sort((a: Ticket, b: Ticket) => a.title.localeCompare(b.title));
+    }
+    return [...tickets];
+};
 
 interface ApiDataProviderProps {
     children: React.ReactNode;
@@ -93,23 +106,6 @@ export const ApiDataProvider: React.FC<ApiDataProviderProps> = ({
     );
 };
 
-const reducer = (state: ApiDataCtx, action: any) => {
-    switch (action.type) {
-        case SET_TICKETS:
-            return { ...state, tickets: action.payload };
-        case SET_USERS:
-            return { ...state, users: action.payload };
-        case SET_LOADING:
-            return { ...state, loading: action.payload };
-        case SET_ERROR:
-            return { ...state, error: action.payload };
-        case SET_DATA:
-            return { ...state, ...action.payload };
-        default:
-            return state;
-    }
-};
-
 const setTicketsAct = (tickets: Ticket[]) => ({
     type: SET_TICKETS,
     payload: tickets,
@@ -140,3 +136,20 @@ const setDataAct = ({
     type: SET_DATA,
     payload: { tickets, users },
 });
+
+const reducer = (state: ApiDataCtx, action: any) => {
+    switch (action.type) {
+        case SET_TICKETS:
+            return { ...state, tickets: action.payload };
+        case SET_USERS:
+            return { ...state, users: action.payload };
+        case SET_LOADING:
+            return { ...state, loading: action.payload };
+        case SET_ERROR:
+            return { ...state, error: action.payload };
+        case SET_DATA:
+            return { ...state, ...action.payload };
+        default:
+            return state;
+    }
+};

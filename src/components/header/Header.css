@@ -3,6 +3,11 @@
     padding: 10px 50px;
     background-color: var(--color-white);
     border-bottom: 1px solid var(--border-light);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
 }
 .display-settings-btn {
     position: relative;
@@ -53,6 +58,7 @@ form {
     padding: 25px;
 
     grid-template-columns: repeat(2, 1fr);
+    align-items: center;
     row-gap: 1.5rem;
     top: 125%;
     left: 0;
@@ -62,7 +68,14 @@ form {
 
     opacity: 1;
 }
-
+.form__input--ordering {
+    cursor: pointer;
+    border: 2px solid var(--border-medium);
+    padding: 2.5px;
+    border-radius: var(--rounded-sm);
+    color: var(--color-black);
+    background-color: var(--color-white);
+}
 .header .form__label {
     font-weight: 500;
     color: var(--color-grey-dark);

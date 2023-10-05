@@ -18,7 +18,7 @@ export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({
     children,
 }) => {
     const [isDarkMode, setIsDarkMode] = useLocalStorageState(
-        window.matchMedia("(prefers-color-scheme: light)").matches,
+        false,
         "isDarkMode"
     );
 

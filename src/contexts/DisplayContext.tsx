@@ -4,9 +4,9 @@ import { DISPLAY_KEY, GROUPING, ORDERING } from "../utils/constants";
 import { useLocalStorageState } from "../hooks";
 
 interface DisplayCtx {
-    grouping: Grouping;
+    grouping: Grouping | "";
     setGrouping: (grouping: Grouping) => void;
-    ordering: Ordering;
+    ordering: Ordering | "";
     setOrdering: (ordering: Ordering) => void;
 }
 
@@ -24,21 +24,35 @@ interface DisplayProviderProps {
 export const DisplayProvider: React.FC<DisplayProviderProps> = ({
     children,
 }) => {
-    const [grouping, setGrouping] = useState<Grouping>(GROUPING.STATUS);
-    const [ordering, setOrdering] = useState<Ordering>(ORDERING.PRIORITY);
+    const [grouping, setGrouping] = useState<Grouping | "">("");
+    const [ordering, setOrdering] = useState<Ordering | "">("");
 
-    const [, setDisplayLS] = useLocalStorageState(
+    const [displayLS, setDisplayLS] = useLocalStorageState(
         { grouping: GROUPING.STATUS, ordering: ORDERING.PRIORITY },
         DISPLAY_KEY
     );
 
     useEffect(() => {
-        setGrouping(grouping);
-    }, [grouping, ordering, setDisplayLS]);
+        setGrouping(displayLS.grouping);
+        setOrdering(displayLS.ordering);
+    }, [displayLS]);
+
+    const handleSetGrouping = (grouping: Grouping) => {
+        setDisplayLS({ grouping, ordering });
+    };
+
+    const handleSetOrdering = (ordering: Ordering) => {
+        setDisplayLS({ grouping, ordering });
+    };
 
     return (
         <DisplayContext.Provider
-            value={{ grouping, setGrouping, ordering, setOrdering }}
+            value={{
+                grouping,
+                setGrouping: handleSetGrouping,
+                ordering,
+                setOrdering: handleSetOrdering,
+            }}
         >
             {children}
         </DisplayContext.Provider>

@@ -3,12 +3,15 @@ import "./Card.css";
 import { CardBody } from "./CardBody";
 import { CardFooter } from "./CardFooter";
 import { Avatar } from "../avatar";
+import { useGrouping } from "../../hooks";
+import { GROUPING } from "../../utils/constants";
 
 interface CardProps {
     ticket: Ticket;
     user: User;
 }
 export const Card: React.FC<CardProps> = ({ ticket, user }) => {
+    const { grouping } = useGrouping();
     return (
         <div className="card">
             <div className="card-content">
@@ -16,7 +19,9 @@ export const Card: React.FC<CardProps> = ({ ticket, user }) => {
                 <CardBody title={ticket.title} status={ticket.status} />
                 <CardFooter tags={ticket.tag} priority={ticket.priority} />
             </div>
-            <Avatar available={user.available} />
+            {!(grouping === GROUPING.USER) && (
+                <Avatar name={user.name} available={user.available} />
+            )}
         </div>
     );
 };
