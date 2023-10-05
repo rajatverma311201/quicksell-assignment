@@ -10,7 +10,6 @@ export const TicketsView = () => {
     const { tickets } = useTickets();
     const { ordering } = useOrdering();
 
-    console.log({ tickets, ordering, grouping });
     const sortedTickets = ordering.length
         ? sortTicketsByOrdering(tickets, ordering || ORDERING.STATUS)
         : tickets;

@@ -8,8 +8,10 @@ import {
     MdSignalCellularAlt1Bar,
     MdSignalCellularAlt2Bar,
 } from "react-icons/md";
+
 import { RxHalf2 } from "react-icons/rx";
 import { FiCircle } from "react-icons/fi";
+
 export const STATUS_ICON_MAP: { [key: string]: JSX.Element } = {
     Todo: <FiCircle className="card__status-icon icon-todo" />,
     "In progress": <RxHalf2 className="card__status-icon icon-progress" />,

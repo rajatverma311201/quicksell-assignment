@@ -5,3 +5,4 @@ export * from "./useOrdering";
 export * from "./useTickets";
 export * from "./useUsers";
 export * from "./useApiData";
+export * from "./useOutsideClick";

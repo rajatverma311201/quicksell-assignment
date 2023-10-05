@@ -62,6 +62,7 @@ body,
 body {
     background-color: var(--bg-color);
     font-family: "Roboto", sans-serif;
+    transition: all 0.2s;
 }
 
 .spinner::before {
@@ -90,7 +91,7 @@ body {
     cursor: pointer;
     border: 2px solid var(--border-medium);
     background-color: var(--color-white);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--color-grey-darkest);
 
     font-weight: 500;
@@ -102,50 +103,55 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3.4rem;
+    height: 3.4rem;
     padding: 10px;
 }
 #dark-mode-btn > * {
     position: absolute;
-    width: 75%;
-    height: 75%;
+    width: 60%;
+    height: 60%;
     transition: transform 1s, opacity 1s;
 }
 
-html.light-mode #dark-mode-btn > .icon-dark-mode {
-    animation: rotate-clock 1s both;
-    color: var(--color-grey-lightest);
+html.light-mode .icon-light-mode {
+    animation: rotate-clock 0.5s forwards;
+    color: var(--color-grey-darkest);
 }
 
-html.dark-mode #dark-mode-btn > .icon-light-mode {
-    color: var(--color-grey-lightest);
-    animation: rotate-anti-clock 1s both;
+html.dark-mode .icon-dark-mode {
+    color: var(--color-grey-darkest);
+    animation: rotate-clock 0.5s forwards;
 }
 
 @keyframes rotate-clock {
-    to {
+    from {
         opacity: 0;
-        transform: scale(0);
+        transform: rotate(135deg) scale(0);
     }
-}
-@keyframes rotate-anti-clock {
     to {
-        opacity: 0;
-        transform: scale(0);
+        opacity: 1;
+        transform: rotate(0) scale(1);
     }
 }
 
-@keyframes rotate-clock-show {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
 }
 
-@keyframes rotate-anti-clock-show {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* Track */
+::-webkit-scrollbar-track:hover {
+    background: var(--color-grey-lightest);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: var(--color-grey-lighter);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-grey-light);
 }

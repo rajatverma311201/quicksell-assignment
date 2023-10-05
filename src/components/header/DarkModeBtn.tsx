@@ -6,8 +6,8 @@ export const DarkModeBtn = () => {
 
     return (
         <div id="dark-mode-btn" onClick={toggleDarkMode}>
-            <BiSun className="icon-light-mode" />
-            <BiMoon className="icon-dark-mode" />
+            {!isDarkMode && <BiSun className="icon-light-mode" />}
+            {isDarkMode && <BiMoon className="icon-dark-mode" />}
         </div>
     );
 };
